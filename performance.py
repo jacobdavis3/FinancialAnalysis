@@ -5,9 +5,19 @@ class Stock:
     def __init__(self, ticker:str) -> None:
         self.attributes = yf.Ticker(ticker)
 
-    def validRanges(self) -> None:
+    def history_periods(self) -> list:
         ranges = self.attributes.history_metadata['validRanges']
-        print(ranges)
+        return ranges
+
+    def calc_percentage(self) -> None: 
+        for period in self.history_periods():
+            timeframe = self.attributes.history(period=period)
+            first_price = timeframe['Open'].iloc[0]
+            last_price = timeframe['Close'].iloc[-1]
+            difference = last_price - first_price
+            percent_change = round(difference / first_price * 100, 2)
+            percent_change_string = "{:,}".format(percent_change) + '%'
+            print(f'{percent_change_string} - {period}')
 
 
 def calc_percentage(stock:yf): 
@@ -25,15 +35,20 @@ def calc_percentage(stock:yf):
 
 
 def main():
-    #msft = yf.Ticker("MSFT") 
+    msft = yf.Ticker("MSFT") 
     #hist = msft.history()
     #value = msft.history_metadata
     #print(value)
     #sp500 = yf.Ticker("^GSPC")            
-    #calc_percentage(msft)
+    calc_percentage(msft)
     #calc_percentage(sp500)
     msft = Stock("msft")
-    msft.validRanges()
+    msft.history_periods()
+    arm = Stock("arm")
+    arm.history_periods()
+    actu = Stock("actu")
+    actu.history_periods()
+    msft.calc_percentage()
     #print(msft.attributes.history())
 
 
