@@ -18,10 +18,15 @@ def calc_percentage(stock):  # figure out how to do type annotation
                      ]
     for period in history_periods:
         timeframe = stock.history(period=period)
-        
-             
+        print(timeframe['Open'].iloc[0], period, sep=' - ')
+        print(timeframe['Close'].iloc[-1], period, sep=' - ')
 
-calc_percentage(arm)
+
+
+
+msft = yf.Ticker("MSFT")             
+
+calc_percentage(msft)
 ########## What happens if I call 10y on a stock w/o that longevity, like ARM ####
 ## ARM: Period '5y' is invalid, must be one of ['1d', '5d', '1mo', '3mo', '6mo', '1y', 'ytd', 'max']
 ## Empty DataFrame
@@ -30,7 +35,7 @@ calc_percentage(arm)
 #his = arm.history(period='5y')
 #print(arm.history(period='5y'))
 
-msft = yf.Ticker("MSFT")
+
 
 msft_info = msft.info
 #print(msft.history(period='5y'))
