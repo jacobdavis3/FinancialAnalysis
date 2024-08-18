@@ -36,7 +36,8 @@ def main():
     arm = Stock("arm")
     actu = Stock("actu")
     ambi = Stock("PBEV")
-    ambi.calc_percentage()
+    msft.calc_percentage()
+    sp.calc_percentage()
     
     sp.valid_periods()
     #msft.calc_percentage()
