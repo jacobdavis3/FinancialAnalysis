@@ -21,13 +21,23 @@ class Stock:
 
     def calc_percentage(self) -> None: 
         for period in self.valid_periods():
-            timeframe = self.attributes.history(period=period)
+            timeframe = self.attributes.history(period=period, actions=True)
             first_price = timeframe['Open'].iloc[0]
             last_price = timeframe['Close'].iloc[-1]
             difference = last_price - first_price
             percent_change = '{:,}'.format(round(difference / first_price * 100, 2))
             self.print_color(percent_change, period)
             #print(f'{percent_change}% - {period}')
+    
+
+    def acqusition_timelines(self) -> None:
+        time = self.attributes.history(start='2003-02-02')
+        first_price = time['Open'].iloc[0]
+        last_price = time['Close'].iloc[-1]
+        difference = last_price - first_price
+        percent_change = '{:,}'.format(round(difference / first_price * 100, 2))
+        self.print_color(percent_change, 'yeet')
+        
 
 
 def main():
@@ -37,7 +47,8 @@ def main():
     actu = Stock("actu")
     ambi = Stock("PBEV")
     msft.calc_percentage()
-    sp.calc_percentage()
+    msft.acqusition_timelines()
+    #sp.calc_percentage()
     
     sp.valid_periods()
     #msft.calc_percentage()
