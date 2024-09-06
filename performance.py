@@ -24,6 +24,9 @@ class Stock:
             timeframe = self.attributes.history(period=period, actions=True)
             first_price = timeframe['Open'].iloc[0]
             last_price = timeframe['Close'].iloc[-1]
+            if period == '1d':
+                print(timeframe)
+                print(round(first_price, 2), round(last_price, 2))
             difference = last_price - first_price
             percent_change = '{:,}'.format(round(difference / first_price * 100, 2))
             self.print_color(percent_change, period)
