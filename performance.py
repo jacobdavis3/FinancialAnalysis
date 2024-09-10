@@ -25,7 +25,6 @@ class Stock:
             first_price = timeframe['Open'].iloc[0]
             last_price = timeframe['Close'].iloc[-1]
             if period == '1d':
-                print(timeframe)
                 print(round(first_price, 2), round(last_price, 2))
             difference = last_price - first_price
             percent_change = '{:,}'.format(round(difference / first_price * 100, 2))
@@ -47,10 +46,12 @@ def main():
     msft = Stock("msft")
     sp = Stock("^GSPC")
     arm = Stock("arm")
+    apple = Stock("AAPL")
     actu = Stock("actu")
     ambi = Stock("PBEV")
     msft.calc_percentage()
-    msft.acqusition_timelines()
+    apple.calc_percentage()
+    #msft.acqusition_timelines()
     #sp.calc_percentage()
     
     sp.valid_periods()
